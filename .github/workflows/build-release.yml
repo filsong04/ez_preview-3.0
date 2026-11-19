@@ -1,0 +1,241 @@
+name: Build EZ Preview release candidates
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*-rc.*'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ez-preview-release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  dependency-lock:
+    name: Resolve and share npm lockfile
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Resolve the dependency tree once for this run
+        run: npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+      - uses: actions/upload-artifact@v4
+        with:
+          name: resolved-npm-lock
+          path: package-lock.json
+          if-no-files-found: error
+          retention-days: 30
+
+  macos:
+    name: macOS · ${{ matrix.profile }}
+    needs: dependency-lock
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - profile: catalina-legacy
+            runner: macos-15-intel
+            arch: x64
+            electron_version: 32.3.3
+            minimum_system_version: 10.15.0
+          - profile: macos-12-intel
+            runner: macos-15-intel
+            arch: x64
+            electron_version: 44.9.0
+            minimum_system_version: 12.0.0
+          - profile: macos-12-apple-silicon
+            runner: macos-15
+            arch: arm64
+            electron_version: 44.9.0
+            minimum_system_version: 12.0.0
+    env:
+      CSC_LINK: ${{ secrets.MACOS_CERTIFICATE_P12_BASE64 }}
+      CSC_KEY_PASSWORD: ${{ secrets.MACOS_CERTIFICATE_PASSWORD }}
+      APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
+      APPLE_API_ISSUER: ${{ secrets.APPLE_API_ISSUER }}
+      APPLE_API_KEY_P8_BASE64: ${{ secrets.APPLE_API_KEY_P8_BASE64 }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: actions/download-artifact@v4
+        with:
+          name: resolved-npm-lock
+          path: .release-lock
+      - name: Install locked dependencies
+        shell: bash
+        run: cp .release-lock/package-lock.json package-lock.json && npm ci --no-audit --no-fund
+      - name: Release preflight
+        run: npm run release:preflight
+      - name: Run automated regression tests
+        run: npm run test:native
+      - name: Switch to Catalina-compatible Electron for legacy build
+        if: matrix.profile == 'catalina-legacy'
+        shell: bash
+        run: |
+          npm pkg set devDependencies.electron="${{ matrix.electron_version }}"
+          # Update package-lock so the included lock accurately describes the legacy Electron build.
+          npm install --no-audit --no-fund
+      - name: Capture bundled FFmpeg build and license details
+        shell: bash
+        run: |
+          FFMPEG_PATH="$(node -p "require('ffmpeg-static')")"
+          "$FFMPEG_PATH" -version > ffmpeg-build-info.txt
+          "$FFMPEG_PATH" -L > ffmpeg-license.txt
+      - name: Generate dependency SBOM for this build profile
+        shell: bash
+        run: npm sbom --sbom-format=spdx > dependency-sbom.spdx.json
+      - name: Prepare Apple notarization API key (optional)
+        if: ${{ env.APPLE_API_KEY_P8_BASE64 != '' && env.CSC_LINK != '' }}
+        shell: bash
+        run: |
+          printf '%s' "$APPLE_API_KEY_P8_BASE64" | base64 --decode > "$RUNNER_TEMP/AuthKey.p8"
+          chmod 600 "$RUNNER_TEMP/AuthKey.p8"
+          echo "APPLE_API_KEY=$RUNNER_TEMP/AuthKey.p8" >> "$GITHUB_ENV"
+      - name: Build DMG and ZIP
+        shell: bash
+        env:
+          BUILD_PROFILE: ${{ matrix.profile }}
+          BUILD_ARCH: ${{ matrix.arch }}
+          MINIMUM_MACOS: ${{ matrix.minimum_system_version }}
+        run: |
+          set -euo pipefail
+          args=(--mac dmg zip "--${BUILD_ARCH}" \
+            "--config.mac.minimumSystemVersion=${MINIMUM_MACOS}" \
+            "--config.directories.output=release/${BUILD_PROFILE}")
+          if [[ -n "${CSC_LINK:-}" ]]; then
+            args+=(--config.mac.hardenedRuntime=true)
+          else
+            # Electron Builder documents disabling Hardened Runtime when no signing identity is used.
+            args+=(--config.mac.identity=null --config.mac.hardenedRuntime=false)
+            echo "No macOS signing certificate configured; creating an unsigned RC artifact for internal testing only."
+          fi
+          if [[ -n "${CSC_LINK:-}" && -n "${APPLE_API_KEY:-}" && -n "${APPLE_API_KEY_ID:-}" && -n "${APPLE_API_ISSUER:-}" ]]; then
+            args+=(--config.mac.notarize=true)
+          else
+            args+=(--config.mac.notarize=false)
+            echo "Apple notarization credentials are incomplete; this RC build will not be notarized and is not ready for public distribution."
+          fi
+          npx electron-builder --publish never "${args[@]}"
+          cp dependency-sbom.spdx.json "release/${BUILD_PROFILE}/dependency-sbom.spdx.json"
+          cp package-lock.json "release/${BUILD_PROFILE}/package-lock.json"
+          cp THIRD_PARTY_NOTICES.md "release/${BUILD_PROFILE}/THIRD_PARTY_NOTICES.md"
+          cp ffmpeg-build-info.txt "release/${BUILD_PROFILE}/ffmpeg-build-info.txt"
+          cp ffmpeg-license.txt "release/${BUILD_PROFILE}/ffmpeg-license.txt"
+          node scripts/write-checksums.cjs "release/${BUILD_PROFILE}"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: EZ-Preview-${{ matrix.profile }}-v1.0.0-rc.5
+          path: release/${{ matrix.profile }}/*
+          if-no-files-found: error
+          retention-days: 30
+
+  windows:
+    name: Windows · x64
+    needs: dependency-lock
+    runs-on: windows-2025
+    env:
+      CSC_LINK: ${{ secrets.WINDOWS_CERTIFICATE_P12_BASE64 }}
+      CSC_KEY_PASSWORD: ${{ secrets.WINDOWS_CERTIFICATE_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: actions/download-artifact@v4
+        with:
+          name: resolved-npm-lock
+          path: .release-lock
+      - name: Install locked dependencies
+        shell: pwsh
+        run: Copy-Item .release-lock/package-lock.json package-lock.json; npm ci --no-audit --no-fund
+      - name: Release preflight
+        run: npm run release:preflight
+      - name: Run automated regression tests
+        run: npm run test:native
+      - name: Capture bundled FFmpeg build and license details
+        shell: pwsh
+        run: |
+          $ffmpeg = node -p "require('ffmpeg-static')"
+          & $ffmpeg -version | Set-Content -Path ffmpeg-build-info.txt -Encoding utf8
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          & $ffmpeg -L | Set-Content -Path ffmpeg-license.txt -Encoding utf8
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Generate dependency SBOM
+        shell: pwsh
+        run: |
+          npm sbom --sbom-format=spdx | Set-Content -Path dependency-sbom.spdx.json -Encoding utf8
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Build NSIS installer and portable executable
+        shell: pwsh
+        run: |
+          npx electron-builder --publish never --win nsis portable --x64 --config.directories.output=release/windows-x64
+          Copy-Item dependency-sbom.spdx.json release/windows-x64/dependency-sbom.spdx.json
+          Copy-Item package-lock.json release/windows-x64/package-lock.json
+          Copy-Item THIRD_PARTY_NOTICES.md release/windows-x64/THIRD_PARTY_NOTICES.md
+          Copy-Item ffmpeg-build-info.txt release/windows-x64/ffmpeg-build-info.txt
+          Copy-Item ffmpeg-license.txt release/windows-x64/ffmpeg-license.txt
+          node scripts/write-checksums.cjs release/windows-x64
+      - uses: actions/upload-artifact@v4
+        with:
+          name: EZ-Preview-windows-x64-v1.0.0-rc.5
+          path: release/windows-x64/*
+          if-no-files-found: error
+          retention-days: 30
+
+  publish-release:
+    name: Publish GitHub Release (on tag push)
+    needs: [macos, windows]
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist-artifacts
+      - name: Collect installers and checksums
+        shell: bash
+        run: |
+          mkdir -p release-upload
+          find dist-artifacts -maxdepth 2 -type f \( -name 'EZ-Preview-*.exe' -o -name 'EZ-Preview-*.dmg' -o -name 'EZ-Preview-*.zip' -o -name 'SHA256SUMS.txt' -o -name 'THIRD_PARTY_NOTICES.md' \) -print0 | while IFS= read -r -d '' file; do
+            dir_name="$(basename "$(dirname "$file")")"
+            base_name="$(basename "$file")"
+            if [[ "$base_name" == "SHA256SUMS.txt" ]]; then
+              cp "$file" "release-upload/${dir_name}-SHA256SUMS.txt"
+            elif [[ "$dir_name" == *"catalina-legacy"* ]]; then
+              cp "$file" "release-upload/catalina-legacy-${base_name}"
+            else
+              cp "$file" "release-upload/${base_name}"
+            fi
+          done
+          ls -lh release-upload
+      - name: Create or update GitHub Pre-release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG_NAME: ${{ github.ref_name }}
+        shell: bash
+        run: |
+          cat << 'NOTES' > release-notes.md
+          # EZ Preview ${TAG_NAME}
+
+          로컬 영상 3D LUT 프리뷰, 컷/디졸브 퀵 시퀀스, 16-bit PNG 및 시퀀스 MP4 내보내기를 지원하는 데스크톱 프리뷰어입니다.
+
+          ## 설치 및 실행 안내 (미서명 베타 빌드)
+          - **Windows**: `EZ-Preview-*-x64.exe` 실행 시 SmartScreen 보호 창이 뜨면 **추가 정보 → 실행**을 클릭하세요.
+          - **macOS**: DMG에서 앱을 옮긴 뒤 처음 실행이 차단되면 **시스템 설정 → 개인정보 보호 및 보안 → 확인 없이 열기**를 눌러 실행하세요.
+          NOTES
+          sed -i "s/\${TAG_NAME}/${TAG_NAME}/g" release-notes.md
+          if gh release view "$TAG_NAME" >/dev/null 2>&1; then
+            gh release upload "$TAG_NAME" release-upload/* --clobber
+          else
+            gh release create "$TAG_NAME" release-upload/* --prerelease --title "EZ Preview $TAG_NAME" --notes-file release-notes.md
+          fi

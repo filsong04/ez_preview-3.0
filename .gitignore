@@ -1,0 +1,13 @@
+node_modules/
+release/
+.DS_Store
+Thumbs.db
+*.log
+.env
+.env.*
+!.env.example
+*.p12
+*.p8
+AuthKey_*.p8
+dependency-sbom.spdx.json
+.release-lock/
