@@ -132,7 +132,7 @@ jobs:
           node scripts/write-checksums.cjs "release/${BUILD_PROFILE}"
       - uses: actions/upload-artifact@v4
         with:
-          name: EZ-Preview-${{ matrix.profile }}-v1.0.0-rc.6
+          name: EZ-Preview-${{ matrix.profile }}-v1.0.0-rc.7
           path: release/${{ matrix.profile }}/*
           if-no-files-found: error
           retention-days: 30
@@ -185,7 +185,7 @@ jobs:
           node scripts/write-checksums.cjs release/windows-x64
       - uses: actions/upload-artifact@v4
         with:
-          name: EZ-Preview-windows-x64-v1.0.0-rc.6
+          name: EZ-Preview-windows-x64-v1.0.0-rc.7
           path: release/windows-x64/*
           if-no-files-found: error
           retention-days: 30

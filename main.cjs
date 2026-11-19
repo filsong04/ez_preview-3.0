@@ -379,7 +379,7 @@ function buildExportCubeText(lutText, useLut, adjustmentInput) {
     || Math.abs(adjustments.temperature) > 1e-6
     || Math.abs(adjustments.tint) > 1e-6;
   const cube = useLut ? parseCubeText(lutText) : {
-    size: hasAdjustments ? 65 : 33,
+    size: hasAdjustments ? 49 : 33,
     domainMin: [0, 0, 0],
     domainMax: [1, 1, 1],
     entries: []
@@ -426,9 +426,8 @@ function buildExportCubeText(lutText, useLut, adjustmentInput) {
       Math.max(0, Math.min(1, b))
     ]);
   } else if (useLut) {
-    // Bake the LUT plus the app's adjustments into a 65^3 dense cube so clipping knees
-    // and steep curves closely match the per-pixel WebGL shader output.
-    outputSize = 65;
+    // Bake the LUT plus adjustments into a 49^3 dense cube (fast bake + high accuracy).
+    outputSize = 49;
     const maxIndex = cube.size - 1;
     const entryAt = (r, g, b) => cube.entries[b * cube.size * cube.size + g * cube.size + r];
     const sampleOriginalCube = (r, g, b) => {
@@ -956,11 +955,11 @@ ipcMain.handle('ez-native:export-original-frame', async (event, payload) => {
       filters.push(`[original][graded]blend=all_expr='if(lt(${axis},${extent}*${position}),${first},${second})'[composite]`);
       const dividerFilters = splitDividerFilters(split, orientation, payload.previewFrameWidth, payload.previewFrameHeight);
       filters.push(`[composite]${dividerFilters.join(',')}[framed]`);
-      filters.push(`[framed]format=rgb48be[out]`);
+      filters.push(`[framed]format=rgb24[out]`);
     } else if (gradeEnabled && lutFilter) {
-      filters.push(`[cropped]${lutFilter},format=rgb48be[out]`);
+      filters.push(`[cropped]${lutFilter},format=rgb24[out]`);
     } else {
-      filters.push(`[cropped]format=rgb48be[out]`);
+      filters.push(`[cropped]format=rgb24[out]`);
     }
 
     renderPath = path.join(ensureProxyDirectory(), `original-frame-${randomUUID()}.png`);
@@ -969,7 +968,7 @@ ipcMain.handle('ez-native:export-original-frame', async (event, payload) => {
       '-ss', String(timeSeconds), '-i', inputPath,
       '-filter_complex', filters.join(';'),
       '-map', '[out]', '-frames:v', '1',
-      '-an', '-c:v', 'png', '-compression_level', '6', '-pred', 'mixed', '-pix_fmt', 'rgb48be',
+      '-an', '-c:v', 'png', '-compression_level', '2', '-pred', 'sub', '-pix_fmt', 'rgb24',
       renderPath
     ];
 
@@ -1015,7 +1014,7 @@ ipcMain.handle('ez-native:export-original-frame', async (event, payload) => {
     await fs.promises.copyFile(renderPath, outputPath);
     const outputStats = await fs.promises.stat(outputPath);
     if (!outputStats.isFile() || outputStats.size < 128) throw new Error('The saved PNG file is missing or incomplete.');
-    return { cancelled: false, outputPath, outputBytes: outputStats.size, bitDepth: 16 };
+    return { cancelled: false, outputPath, outputBytes: outputStats.size, bitDepth: 8 };
   } finally {
     if (cubePath) await fs.promises.rm(cubePath, { force: true }).catch(() => {});
     if (renderPath) await fs.promises.rm(renderPath, { force: true }).catch(() => {});

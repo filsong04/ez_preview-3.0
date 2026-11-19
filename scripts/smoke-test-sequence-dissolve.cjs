@@ -111,7 +111,9 @@ try {
   assert.match(probe.stderr, /Audio: aac/, 'exported MP4 should preserve audio with silent pad for Clip B');
   assert.match(probe.stderr, /Duration:\s*00:00:03\.5/, 'trimmed 2s + 2s with 0.5s dissolve should export ~3.5s');
 
-  console.log(`PASS: dual-deck WebGL2 dissolve, In/Out trim math, and real FFmpeg xfade+acrossfade MP4 export (640x360, 3.5s, ${stat.size.toLocaleString()} bytes).`);
+  assert.match(html, /window\.addEventListener\('pointermove', onMove\)/, 'timeline trim drag must bind pointermove on window so DOM updates never cancel drag');
+assert.match(mainSource, /-pix_fmt', 'rgb24'/, 'original-resolution PNG export should use fast 8-bit rgb24');
+console.log(`PASS: dual-deck WebGL2 dissolve, In/Out trim math, and real FFmpeg xfade+acrossfade MP4 export (640x360, 3.5s, ${stat.size.toLocaleString()} bytes).`);
 } finally {
   fs.rmSync(tmpDir, { recursive: true, force: true });
 }

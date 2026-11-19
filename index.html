@@ -525,6 +525,116 @@
 }
 .tl-trans.is-dissolve:hover{background:#f59e0b!important;color:#0d0e11!important}
 
+/* ==================== RC7: True Achromatic Matte Pro Studio Theme (Zero Glow, Zero Toy Look) ==================== */
+:root{
+  --bg:#141414; --panel:#1c1c1c; --panel2:#232323; --line:#2d2d2d; --line-strong:#3c3c3c;
+  --muted:#8a8a8a; --text:#e2e2e2; --amber:#d49b38; --amber2:#e0ad4f; --green:#4eb883; --red:#d9534f;
+  --radius:4px;
+}
+html,body,.app{background:#121212!important;color:#e2e2e2!important}
+.topbar{height:44px!important;min-height:44px!important;padding:0 12px!important;background:#1a1a1a!important;border-bottom:1px solid #2b2b2b!important;box-shadow:none!important}
+.brand-mark{width:24px!important;height:24px!important;border-radius:3px!important;background:#262626!important;border:1px solid #383838!important;color:#d49b38!important;box-shadow:none!important}
+.brand-name{font-size:12.5px!important;font-weight:700!important;letter-spacing:.04em!important;color:#e6e6e6!important}
+
+/* Flat, crisp, matte precision controls — zero glow, zero bubbly radius */
+.btn{min-height:28px!important;height:28px!important;padding:0 9px!important;border-radius:3px!important;border:1px solid #303030!important;background:#242424!important;color:#cccccc!important;font-size:11px!important;font-weight:500!important;box-shadow:none!important}
+.btn:hover:not(:disabled){background:#2e2e2e!important;border-color:#444444!important;color:#f5f5f5!important}
+.topbar .btn.primary,.tl-header .btn.primary{background:#2d2d2d!important;border-color:#d49b38!important;color:#f0c775!important;font-weight:600!important;box-shadow:none!important}
+.topbar .btn.primary:hover:not(:disabled),.tl-header .btn.primary:hover:not(:disabled){background:#363636!important;border-color:#e0ad4f!important;color:#fff!important}
+.btn.icon{width:28px!important;min-width:28px!important;height:28px!important;min-height:28px!important}
+.video-add-btn{background:#2a2a2a!important;border-color:#424242!important;color:#ececec!important;font-weight:600!important}
+.video-add-btn:hover:not(:disabled){background:#363636!important;border-color:#5a5a5a!important}
+.media-bin-trigger,.sequence-trigger,.lut-library-btn,.state-switch,.lut-switch,.adjustment-switch,.aspect-select,.preview-resolution-select,.grade-bypass-btn,.language-toggle{height:28px!important;min-height:28px!important;border-radius:3px!important;box-shadow:none!important}
+.toolbar-center .btn.icon.split-main-btn,.toolbar-center .btn.icon.split-config-btn,.toolbar-center .btn.icon.big-tool-btn,.toolbar-right .btn.icon{width:28px!important;min-width:28px!important;height:28px!important;min-height:28px!important;border-radius:3px!important}
+.media-bin-trigger span,.sequence-trigger span{background:#343434!important;color:#d4d4d4!important;border-color:#1a1a1a!important;border-radius:3px!important}
+.sequence-trigger.primary span{background:#3f3522!important;color:#f0c775!important}
+.state-switch.is-on,.lut-switch.is-on,.adjustment-switch.is-on{background:#28241c!important;border-color:#8a6b2e!important}
+.state-switch.is-on .switch-track,.lut-switch.is-on .switch-track,.adjustment-switch.is-on .switch-track{background:#b0802a!important;border-color:#d49b38!important}
+.snapshot-camera-btn{background:#242424!important;border-color:#383838!important;color:#d49b38!important}
+.snapshot-camera-btn:hover{background:#303030!important;border-color:#555!important}
+.language-toggle[data-language="en"],.language-toggle[data-language="ko"]{background:#242424!important;border-color:#383838!important;color:#d4d4d4!important;box-shadow:none!important}
+.divider,.toolbar-section-divider{background:#2f2f2f!important;height:18px!important}
+.split-control-group{border-left-color:#2f2f2f!important}
+
+/* Docked edge-to-edge studio workspace (zero floating card gaps) */
+.workspace{padding:0!important;gap:0!important;grid-template-columns:256px minmax(0,1fr)!important;background:#121212!important}
+.workspace.media-collapsed{grid-template-columns:0 minmax(0,1fr)!important;padding-left:0!important}
+.workspace>.media-bin-panel{border:0!important;border-right:1px solid #2b2b2b!important;border-radius:0!important;background:#181818!important}
+.workspace>.stage{border:0!important;border-radius:0!important;background:#0f0f0f!important}
+.stage:before{display:none!important}
+#videoFrame{border:1px solid #242424!important;box-shadow:none!important}
+.drop-card{border-radius:6px!important;border:1px dashed #383838!important;background:#181818!important;box-shadow:none!important}
+.drop-icon{border-radius:6px!important;background:#242424!important;border-color:#383838!important;color:#d49b38!important}
+
+/* Neutral Matte Sidebar */
+.media-bin-head,.media-bin-import-row,.media-folder-section,.media-section-head,.media-clip-head,.proxy-queue-panel,.media-bin-footer{background:#181818!important;border-color:#282828!important}
+.media-bin-head strong,.media-section-head strong,.media-clip-head strong{color:#9a9a9a!important;font-weight:700!important}
+.media-bin-item{border-radius:3px!important;border:1px solid #282828!important;background:#1e1e1e!important}
+.media-bin-item:hover{background:#252525!important;border-color:#383838!important}
+.media-bin-item.active{background:#27241e!important;border-color:#9e7730!important}
+.media-bin-item-seq,.media-bin-item-remove{border-radius:3px!important;background:#262626!important;border-color:#363636!important}
+.media-bin-item-seq{color:#d49b38!important}
+.media-bin-item-seq:hover{background:#342d1f!important;border-color:#9e7730!important}
+
+/* Quiet Floating Panels & Overlays (zero glow) */
+.scope-panel,.split-settings-panel,.tool-panel,.lut-modal,.shortcut-modal,.video-info-overlay{background:#181818f5!important;border:1px solid #323232!important;border-radius:5px!important;box-shadow:0 10px 28px #00000099!important}
+.hud{background:#141414cc!important;border:1px solid #2c2c2c!important;border-radius:3px!important}
+.hud-dot{box-shadow:none!important;background:#4eb883!important}
+.stage-message{background:#181818e6!important;border:1px solid #303030!important;border-radius:3px!important;color:#a0a0a0!important}
+.preview-fullscreen-btn{border-radius:3px!important;background:#1a1a1ad9!important;border-color:#3a3a3a!important;color:#d4d4d4!important;box-shadow:none!important}
+.preview-fullscreen-btn:hover{background:#2a2a2a!important;border-color:#555!important;color:#fff!important}
+
+/* Matte Studio Footer Transport */
+.footer{height:48px!important;padding:0 14px!important;background:#1a1a1a!important;border-top:1px solid #2b2b2b!important}
+.play-btn{width:30px!important;height:30px!important;border-radius:3px!important;background:#d49b38!important;color:#111!important;box-shadow:none!important}
+.play-btn:hover{background:#e0ad4f!important}
+
+/* Matte Studio Single-Track Timeline (Premiere / DaVinci Flat Precision) */
+.sequence-bar{height:126px!important;background:#161616!important;border-top:1px solid #2d2d2d!important}
+.tl-header{height:30px!important;background:#1c1c1c!important;border-bottom:1px solid #2a2a2a!important}
+.tl-badge{color:#a8a8a8!important;font-weight:700!important}
+.tl-time-pill{background:#121212!important;border:1px solid #2e2e2e!important;border-radius:3px!important;color:#dcdcdc!important}
+.tl-viewport{background:#121212!important}
+.tl-ruler{height:20px!important;background:#181818!important;border-bottom:1px solid #2a2a2a!important}
+.tl-tick{border-left-color:#2b2b2b!important}
+.tl-tick.major{border-left-color:#444444!important}
+.tl-tick-label{color:#7c7c7c!important}
+.tl-track-lane{background:#141414!important}
+.tl-clip{
+  top:6px!important;bottom:6px!important;border-radius:3px!important;
+  border:1px solid #3c5468!important;background:#263542!important;
+  box-shadow:inset 0 2px 0 #5b84a6!important;transition:none!important;
+}
+.tl-clip:hover{background:#2d3f4f!important;border-color:#54748f!important}
+.tl-clip.active{border-color:#c89335!important;background:#332c20!important;box-shadow:inset 0 2px 0 #d49b38!important}
+.tl-clip.trimming{border-color:#e0ad4f!important;z-index:7!important}
+.tl-trim-handle{width:10px!important}
+.tl-trim-handle:hover,.tl-trim-handle.dragging{background:#d49b38aa!important}
+.tl-trim-left{border-left:2px solid transparent}
+.tl-trim-right{border-right:2px solid transparent}
+.tl-clip:hover .tl-trim-left{border-left-color:#ffffff33}
+.tl-clip:hover .tl-trim-right{border-right-color:#ffffff33}
+
+/* True Visual Cross-Dissolve Overlap Zone (Premiere/Resolve X-bowtie spanning exact overlap) */
+.tl-trans.is-cut::before{background:#525252!important;box-shadow:none!important}
+.tl-trans.is-cut:hover::before{background:#d49b38!important;box-shadow:none!important}
+.tl-trans.is-dissolve{
+  top:6px!important;bottom:6px!important;height:auto!important;transform:none!important;
+  border-radius:2px!important;padding:0!important;overflow:hidden!important;
+  background:rgba(212,155,56,0.22)!important;border:1px solid #d49b38!important;
+  box-shadow:none!important;display:block!important;
+}
+.tl-trans.is-dissolve:hover{background:rgba(212,155,56,0.38)!important}
+.tl-xfade-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.tl-xfade-svg line{stroke:#e5b454;stroke-width:1.6;vector-effect:non-scaling-stroke;opacity:.85}
+.tl-xfade-lbl{
+  position:absolute;left:50%;bottom:2px;transform:translateX(-50%);
+  padding:0 4px;border-radius:2px;background:#141414dd;color:#f0c775;
+  font:8.5px ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:700;line-height:13px;white-space:nowrap;
+}
+.tl-playhead{width:1.5px!important;background:#d94848!important;box-shadow:none!important}
+.tl-playhead::before{width:9px!important;height:9px!important;background:#d94848!important}
+
 </style>
 
 </head>
@@ -2672,7 +2782,7 @@
         const parsed = parseCubeFile(text);
         const id = 'ez-preview-bundled-dji-osmo-lut-v1';
         if (!(await getStoredLut(id))) {
-          await saveStoredLut({ id, name: 'DJI OSMO Action 4 D-Log M to Rec.709 V1.cube', text, size: parsed.size, bytes: new Blob([text]).size, addedAt: Date.now(), bundled: true });
+          await saveStoredLut({ id, name: 'EZ Preview · Log to Rec.709.cube', text, size: parsed.size, bytes: new Blob([text]).size, addedAt: Date.now(), bundled: true });
         }
       }
       await setLutPreference('bundledDjiSeeded', true);
@@ -3351,33 +3461,46 @@
     }
     renderSequenceBar();
   }
-  function installTimelineTrimDrag(handle, entry, side) {
+  function installTimelineTrimDrag(handle, clipEl, entry, side) {
     handle.addEventListener('pointerdown', e => {
       e.stopPropagation();
       e.preventDefault();
+      state.seqUserZoomed = true;
       handle.classList.add('dragging');
-      try { handle.setPointerCapture(e.pointerId); } catch (_) {}
+      clipEl.classList.add('trimming');
       const startX = e.clientX;
+      const px = Math.max(8, state.seqPxPerSec);
       const startBounds = getSequenceClipBounds(entry);
+      const origLeft = parseFloat(clipEl.style.left) || 0;
       const onMove = ev => {
-        const deltaSec = (ev.clientX - startX) / Math.max(8, state.seqPxPerSec);
+        const deltaSec = (ev.clientX - startX) / px;
         if (side === 'left') {
-          entry.inPoint = Number(Math.max(0, Math.min(startBounds.outPt - 0.2, startBounds.inPt + deltaSec)).toFixed(2));
+          const nextIn = Number(Math.max(0, Math.min(startBounds.outPt - 0.2, startBounds.inPt + deltaSec)).toFixed(2));
+          entry.inPoint = nextIn;
+          const trimmedDelta = nextIn - startBounds.inPt;
+          const newDur = Math.max(0.2, startBounds.outPt - nextIn);
+          clipEl.style.left = `${origLeft + trimmedDelta * px}px`;
+          clipEl.style.width = `${Math.max(24, newDur * px)}px`;
         } else {
-          entry.outPoint = Number(Math.max(startBounds.inPt + 0.2, Math.min(startBounds.rawDuration, startBounds.outPt + deltaSec)).toFixed(2));
+          const nextOut = Number(Math.max(startBounds.inPt + 0.2, Math.min(startBounds.rawDuration, startBounds.outPt + deltaSec)).toFixed(2));
+          entry.outPoint = nextOut;
+          const newDur = Math.max(0.2, nextOut - startBounds.inPt);
+          clipEl.style.width = `${Math.max(24, newDur * px)}px`;
         }
+        const durEl = clipEl.querySelector('.tl-clip-sub span');
+        if (durEl) durEl.textContent = timecode(getSequenceClipBounds(entry).duration).slice(3);
+      };
+      const onUp = () => {
+        handle.classList.remove('dragging');
+        clipEl.classList.remove('trimming');
+        window.removeEventListener('pointermove', onMove);
+        window.removeEventListener('pointerup', onUp);
+        window.removeEventListener('pointercancel', onUp);
         renderSequenceBar();
       };
-      const onUp = ev => {
-        handle.classList.remove('dragging');
-        handle.removeEventListener('pointermove', onMove);
-        handle.removeEventListener('pointerup', onUp);
-        handle.removeEventListener('pointercancel', onUp);
-        try { if (handle.hasPointerCapture(ev.pointerId)) handle.releasePointerCapture(ev.pointerId); } catch (_) {}
-      };
-      handle.addEventListener('pointermove', onMove);
-      handle.addEventListener('pointerup', onUp);
-      handle.addEventListener('pointercancel', onUp);
+      window.addEventListener('pointermove', onMove);
+      window.addEventListener('pointerup', onUp);
+      window.addEventListener('pointercancel', onUp);
     });
   }
   function renderTimelineRuler(totalDuration, totalWidthPx) {
@@ -3470,8 +3593,8 @@
 
       const leftTrim = document.createElement('div'); leftTrim.className = 'tl-trim-handle tl-trim-left'; leftTrim.title = 'Drag to trim In point';
       const rightTrim = document.createElement('div'); rightTrim.className = 'tl-trim-handle tl-trim-right'; rightTrim.title = 'Drag to trim Out point';
-      installTimelineTrimDrag(leftTrim, entry, 'left');
-      installTimelineTrimDrag(rightTrim, entry, 'right');
+      installTimelineTrimDrag(leftTrim, clipEl, entry, 'left');
+      installTimelineTrimDrag(rightTrim, clipEl, entry, 'right');
 
       const topRow = document.createElement('div'); topRow.className = 'tl-clip-row';
       const title = document.createElement('span'); title.className = 'tl-clip-title';
@@ -3510,8 +3633,8 @@
         if (seg.overlap > 0) {
           trans.className = 'tl-trans is-dissolve';
           trans.style.left = `${(seg.end - seg.overlap) * px}px`;
-          trans.style.width = `${Math.max(26, seg.overlap * px)}px`;
-          trans.textContent = `✕${entry.dissolveSec}s`;
+          trans.style.width = `${Math.max(28, seg.overlap * px)}px`;
+          trans.innerHTML = `<svg class="tl-xfade-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><line x1="0" y1="0" x2="100" y2="100"/><line x1="0" y1="100" x2="100" y2="0"/></svg><span class="tl-xfade-lbl">${entry.dissolveSec}s</span>`;
           trans.title = `Cross-Dissolve ${entry.dissolveSec}s (click to cycle)`;
         } else {
           trans.className = 'tl-trans is-cut';
@@ -3697,7 +3820,7 @@
         }
       });
       if (result?.cancelled) { toast('PNG export canceled.'); return { handled: true }; }
-      toast(`Original-resolution PNG saved · ${fmtBytes(result.outputBytes || 0)} · 16-bit`, 5000);
+      toast(state.language === 'ko' ? `원본 해상도 PNG 저장 완료 · ${fmtBytes(result.outputBytes || 0)}` : `Original-resolution PNG saved · ${fmtBytes(result.outputBytes || 0)}`, 4200);
       return { handled: true };
     } catch (error) {
       console.warn('Original-resolution PNG export unavailable; falling back to preview capture:', error);
