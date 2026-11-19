@@ -1,6 +1,6 @@
 {
   "name": "ez-preview-desktop",
-  "version": "1.0.0-rc.5",
+  "version": "1.0.0-rc.6",
   "description": "Fast local video and LUT preview for macOS and Windows",
   "private": true,
   "main": "main.cjs",

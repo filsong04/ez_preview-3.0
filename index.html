@@ -460,6 +460,71 @@
   width:11px;height:11px;background:#ef4444;clip-path:polygon(0 0,100% 0,100% 55%,50% 100%,0 55%);
 }
 
+/* ==================== RC6: Ultra-Clean Minimalist Pro UI/UX Overhaul ==================== */
+/* 1. Tame excessive yellow/amber glare: neutral dark chrome, amber ONLY on Play + active indicators */
+.topbar{height:48px!important;min-height:48px!important;padding:0 14px!important;background:#0c0e12!important;border-bottom:1px solid #1b1f28!important}
+.brand-mark{width:26px!important;height:26px!important;border-radius:6px!important;background:#1b1f28!important;border:1px solid #2e3444!important;color:#f59e0b!important;box-shadow:none!important}
+.brand-mark svg{width:17px!important;height:17px!important}
+.brand-sub{display:none!important}
+.btn{min-height:30px!important;height:30px!important;padding:0 10px!important;border-radius:6px!important;border:1px solid #222732!important;background:#14171f!important;color:#c9d1de!important;font-size:11px!important;font-weight:600!important}
+.btn:hover:not(:disabled){background:#1d222d!important;border-color:#343c4d!important;color:#f3f5f8!important}
+/* Subtle active accent instead of blinding solid orange blocks */
+.topbar .btn.primary,.tl-header .btn.primary{background:#1c212c!important;border-color:#d97706!important;color:#fbbf24!important;font-weight:700!important;box-shadow:inset 0 0 0 1px #f59e0b22!important}
+.topbar .btn.primary:hover:not(:disabled),.tl-header .btn.primary:hover:not(:disabled){background:#252b38!important;border-color:#f59e0b!important;color:#fde68a!important}
+.video-add-btn{background:#1d222e!important;border-color:#353d4f!important;color:#eef2f7!important;min-width:86px!important}
+.video-add-btn:hover:not(:disabled){background:#272e3d!important;border-color:#4c576e!important;color:#fff!important}
+.media-bin-trigger{width:32px!important;min-width:32px!important;height:30px!important;min-height:30px!important}
+.media-bin-trigger span{background:#2d3444!important;color:#e2e8f0!important;border-color:#0c0e12!important;font-weight:750!important}
+.sequence-trigger{height:30px!important;min-height:30px!important}
+.sequence-trigger span{background:#242936!important;color:#cbd5e1!important}
+.sequence-trigger.primary span{background:#f59e0b26!important;color:#fbbf24!important}
+.lut-library-btn{height:30px!important;min-height:30px!important;border-color:#262b36!important;background:#14171f!important;color:#d5dbe5!important}
+.lut-library-btn:hover:not(:disabled){border-color:#4b5568!important;color:#fff!important}
+.state-switch,.lut-switch,.adjustment-switch{width:38px!important;min-width:38px!important;height:30px!important;min-height:30px!important;border-radius:6px!important}
+.toolbar-center .btn.icon.split-main-btn,.toolbar-center .btn.icon.split-config-btn,.toolbar-center .btn.icon.big-tool-btn,.toolbar-right .btn.icon{width:30px!important;min-width:30px!important;height:30px!important;min-height:30px!important}
+.aspect-select,.preview-resolution-select{height:30px!important;min-height:30px!important;font-size:10px!important}
+.grade-bypass-btn,.language-toggle{height:30px!important;min-height:30px!important}
+
+/* 2. Hero Video Stage: quiet HUD & compact status pill */
+.workspace{padding:8px 10px!important;gap:8px!important;grid-template-columns:264px minmax(0,1fr)!important}
+.hud{left:12px!important;top:12px!important;padding:5px 9px!important;border-radius:6px!important;background:rgba(10,12,16,.68)!important;border:1px solid #ffffff14!important;box-shadow:none!important;opacity:.72;transition:opacity .18s}
+.stage:hover .hud{opacity:1}
+.hud-title{font-size:10px!important;font-weight:650!important;color:#e2e8f0!important}
+.hud-meta{margin-top:2px!important;font-size:9px!important;color:#8a94a6!important}
+.stage-message{bottom:10px!important;padding:4px 10px!important;border-radius:999px!important;font-size:10px!important;background:rgba(12,14,19,.82)!important;border:1px solid #ffffff18!important;color:#9aa4b5!important;backdrop-filter:blur(8px)}
+
+/* 3. Sidebar Diet: auto-hide folders when empty/single, collapse proxy queue behind toggle */
+.media-folder-section.is-auto-hidden{display:none!important}
+.proxy-queue-panel{display:none!important;padding:8px!important;border-top:1px solid #1c2029!important;background:#0c0e13!important}
+.proxy-queue-panel.is-expanded{display:flex!important}
+.media-bin-footer{padding:6px 8px!important;gap:6px!important}
+.media-bin-footer .btn{min-height:24px!important;height:24px!important;padding:0 7px!important;font-size:9px!important}
+.queue-drawer-toggle{min-height:24px!important;height:24px!important;padding:0 7px!important;font-size:9px!important;flex:none}
+.media-bin-item-main{min-height:54px!important;padding:6px 8px!important;gap:3px!important}
+.media-bin-item-name{font-size:10.5px!important;font-weight:700!important}
+
+/* 4. Unified Timeline + Transport (NO duplicate seekbar!) */
+.app.timeline-open .footer{height:44px!important;padding:0 14px!important;background:#0c0e12!important}
+.app.timeline-open .footer .timeline{display:none!important}
+.app.timeline-open .footer .transport{gap:10px!important}
+.app.timeline-open .footer .play-btn{width:30px!important;height:30px!important;border-radius:7px!important;font-size:12px!important}
+.app.timeline-open .footer .volume{margin-left:auto!important}
+.sequence-bar{height:122px!important;background:#0b0d11!important;border-top:1px solid #1e222c!important}
+.tl-header{height:32px!important;padding:0 12px!important;background:#0f1218!important;border-bottom:1px solid #1c202a!important}
+.tl-header-center{gap:5px!important}
+.tl-trim-subtle{display:flex;align-items:center;gap:3px;padding-left:6px;margin-left:2px;border-left:1px solid #222732}
+.tl-trim-subtle .btn{min-width:24px!important;padding:0 6px!important;color:#8e98aa!important;font-size:9.5px!important}
+.tl-clip{top:7px!important;bottom:7px!important;border-radius:5px!important;padding:4px 8px!important}
+.tl-clip-title{font-size:10px!important;font-weight:650!important}
+/* Keep dissolve pill cleanly centered vertically & never colliding with text */
+.tl-trans.is-dissolve{
+  top:50%!important;bottom:auto!important;height:20px!important;transform:translateY(-50%)!important;
+  border-radius:999px!important;padding:0 6px!important;min-width:34px!important;
+  background:#1f1910eb!important;border:1px solid #f59e0b!important;color:#fde68a!important;
+  font-size:8.5px!important;font-weight:800!important;box-shadow:0 2px 8px #000a!important;
+}
+.tl-trans.is-dissolve:hover{background:#f59e0b!important;color:#0d0e11!important}
+
 </style>
 
 </head>
@@ -515,7 +580,7 @@
         <div class="media-clip-head"><strong id="mediaClipFolderName">ALL CLIPS</strong><div class="media-clip-head-actions"><select id="mediaClipSort" class="media-clip-sort" aria-label="Sort clips" title="Sort by filename or file creation date (modified date if creation time is unavailable)"><option value="name-asc">Name A–Z</option><option value="name-desc">Name Z–A</option><option value="created-desc">Date newest</option><option value="created-asc">Date oldest</option></select><span id="mediaClipCount">0 clips</span></div></div>
         <div class="media-bin-list" id="mediaBinList" aria-live="polite"><div class="media-bin-empty">Add videos or import a folder. Clips will appear here.</div></div>
         <div class="proxy-queue-panel" aria-label="Background proxy queue"><div class="proxy-queue-top"><div style="min-width:0"><strong id="proxyQueueSummary">Background queue ready</strong><span id="proxyQueueDetail">Prepare clips in the background, one at a time.</span></div></div><div class="proxy-queue-actions"><button class="btn" id="proxyQueuePauseBtn" type="button" disabled>Pause queue</button><button class="btn" id="proxyQueueRetryBtn" type="button" disabled>Retry failed</button><button class="btn" id="proxyQueueCancelBtn" type="button" disabled>Cancel queue</button></div></div>
-        <div class="media-bin-footer"><span id="proxyCacheInfo">Proxy cache · loading</span><button class="btn" id="clearProxyCacheBtn" type="button" title="Remove cached proxy files (the active proxy is kept)">Clear cache</button></div>
+        <div class="media-bin-footer"><span id="proxyCacheInfo">Proxy cache · loading</span><button class="btn queue-drawer-toggle" id="proxyQueueDrawerBtn" type="button" title="Toggle background proxy queue" aria-expanded="false">Queue ▾</button><button class="btn" id="clearProxyCacheBtn" type="button" title="Remove cached proxy files (the active proxy is kept)">Clear cache</button></div>
       </section>
     <section class="stage" id="stage" aria-label="영상 미리보기 영역">
       <div id="videoFrame"><div id="videoSurface"><video id="video" playsinline preload="metadata"></video><video id="videoB" playsinline preload="auto" aria-hidden="true"></video><canvas id="lutCanvas" aria-label="LUT 적용 미리보기"></canvas><button class="btn icon preview-fullscreen-btn" id="fullscreenBtn" type="button" title="Fullscreen preview (F)" aria-label="Fullscreen preview" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M21 16v5h-5M3 16v5h5"/></svg></button>
@@ -601,11 +666,13 @@
       <div class="tl-header-center">
         <button class="btn primary" id="seqModeBtn" type="button" title="Play connected clips in sequence" disabled>▶ Play Timeline</button>
         <button class="btn" id="seqAddAllBtn" type="button" title="Add all clips from Media Browser">+ Add All</button>
-        <button class="btn" id="seqSetInBtn" type="button" title="Set active clip In point (Shift+I)" disabled>In</button>
-        <button class="btn" id="seqSetOutBtn" type="button" title="Set active clip Out point (Shift+O)" disabled>Out</button>
-        <button class="btn" id="seqResetTrimBtn" type="button" title="Reset active clip In/Out trim" disabled>↺ Trim</button>
         <button class="btn" id="seqExportBtn" type="button" title="Export sequence as MP4 (with cuts, dissolves & LUT)" disabled>Export MP4</button>
         <button class="btn" id="seqClearBtn" type="button" title="Clear sequence" disabled>Clear</button>
+        <div class="tl-trim-subtle" title="Trim active clip (or drag clip edges)">
+          <button class="btn" id="seqSetInBtn" type="button" title="Set active clip In point (Shift+I)" disabled>In</button>
+          <button class="btn" id="seqSetOutBtn" type="button" title="Set active clip Out point (Shift+O)" disabled>Out</button>
+          <button class="btn" id="seqResetTrimBtn" type="button" title="Reset active clip In/Out trim" disabled>↺</button>
+        </div>
       </div>
       <div class="tl-header-right">
         <div class="tl-zoom-wrap" title="Timeline zoom">
@@ -655,13 +722,13 @@
   const sampleCtx = sampleCanvas.getContext('2d', { willReadFrequently: true });
   const lutCanvas = $('lutCanvas');
   const lutFileInput = $('lutFileInput');
-  const state = { file: null, objectUrl: null, proxyObjectUrl: null, nativeProxyPath: null, proxyActive: false, mediaItems: [], currentMediaId: null, selectedMediaFolder: null, mediaInfo: null, metadataProbeCleanup: null, proxyQueuePaused: true, proxyQueueRunning: false, proxyQueueCancelRequested: false, proxyQueueYieldRequested: false, proxyQueueJobId: null, proxyQueueCurrentMediaId: null, proxyQueueCurrentPromise: null, proxyQueuePumpPromise: null, proxyQueueProgress: '', proxyQueueLastProgressPaint: 0, keepMediaBinOpenOnImport: false, gradeBypass: false, videoInfoOpen: false, showFavoriteLutsOnly: false, compatibilityBusy: false, fallbackAttempted: false, compatibilityJobId: 0, ffmpeg: null, ffmpegLoadPromise: null, ffmpegAssetUrls: [], ffmpegLogs: [], compatibilityReport: '', compatibilityPhase: '', compatibilityStartedAt: 0, compatibilityLastActivityAt: 0, aspect: 'native', metadataReady: false, seekingByUser: false, scopeOpen: false, scopeRaf: 0, lastScopeAt: 0, toastTimer: 0, currentLut: null, currentLutName: '', currentLutId: null, lutEnabled: false, lutVisible: false, lutUploaded: false, lutGl: null, lutProgram: null, lutUniforms: {}, videoTexture: null, lutTexture: null, lutSize: 0, lutLinear: false, lutDomainMin: [0,0,0], lutDomainMax: [1,1,1], lutVideoCallback: 0, lutFallbackRaf: 0, lutEngineError: '', splitEnabled: false, splitOrientation: 'vertical', splitPosition: 0.5, splitInvert: false, splitDragging: false, splitThickness: 2, splitColor: '#f4ae36', scopeMode: 'waveform', toolsOpen: false, adjustmentsEnabled: true, adjustments: { exposure: 0, contrast: 1, saturation: 1, temperature: 0, tint: 0 }, previewMaxDimension: 960, mediaSort: 'name-asc', language: 'en', nativeMediaError: '', videoTextureB: null, sequenceOpen: false, sequenceMode: false, sequenceItems: [], sequenceIndex: 0, sequenceDissolveMix: 0, sequenceDeckAUrl: null, sequenceDeckAMediaId: null, sequenceDeckBUrl: null, sequenceDeckBMediaId: null, seqActiveDeck: 'A', seqPxPerSec: 44, seqGlobalTime: 0, sequenceRaf: 0, sequenceTransitioning: false };
+  const state = { file: null, objectUrl: null, proxyObjectUrl: null, nativeProxyPath: null, proxyActive: false, mediaItems: [], currentMediaId: null, selectedMediaFolder: null, mediaInfo: null, metadataProbeCleanup: null, proxyQueuePaused: true, proxyQueueRunning: false, proxyQueueCancelRequested: false, proxyQueueYieldRequested: false, proxyQueueJobId: null, proxyQueueCurrentMediaId: null, proxyQueueCurrentPromise: null, proxyQueuePumpPromise: null, proxyQueueProgress: '', proxyQueueLastProgressPaint: 0, keepMediaBinOpenOnImport: false, gradeBypass: false, videoInfoOpen: false, showFavoriteLutsOnly: false, compatibilityBusy: false, fallbackAttempted: false, compatibilityJobId: 0, ffmpeg: null, ffmpegLoadPromise: null, ffmpegAssetUrls: [], ffmpegLogs: [], compatibilityReport: '', compatibilityPhase: '', compatibilityStartedAt: 0, compatibilityLastActivityAt: 0, aspect: 'native', metadataReady: false, seekingByUser: false, scopeOpen: false, scopeRaf: 0, lastScopeAt: 0, toastTimer: 0, currentLut: null, currentLutName: '', currentLutId: null, lutEnabled: false, lutVisible: false, lutUploaded: false, lutGl: null, lutProgram: null, lutUniforms: {}, videoTexture: null, lutTexture: null, lutSize: 0, lutLinear: false, lutDomainMin: [0,0,0], lutDomainMax: [1,1,1], lutVideoCallback: 0, lutFallbackRaf: 0, lutEngineError: '', splitEnabled: false, splitOrientation: 'vertical', splitPosition: 0.5, splitInvert: false, splitDragging: false, splitThickness: 2, splitColor: '#f4ae36', scopeMode: 'waveform', toolsOpen: false, adjustmentsEnabled: true, adjustments: { exposure: 0, contrast: 1, saturation: 1, temperature: 0, tint: 0 }, previewMaxDimension: 960, mediaSort: 'name-asc', language: 'en', nativeMediaError: '', videoTextureB: null, sequenceOpen: false, sequenceMode: false, sequenceItems: [], sequenceIndex: 0, sequenceDissolveMix: 0, sequenceDeckAUrl: null, sequenceDeckAMediaId: null, sequenceDeckBUrl: null, sequenceDeckBMediaId: null, seqActiveDeck: 'A', seqPxPerSec: 44, seqUserZoomed: false, seqGlobalTime: 0, sequenceRaf: 0, sequenceTransitioning: false };
   try { const savedDimension = Number(localStorage.getItem('ezPreviewMaxDimension')); if ([960, 1920].includes(savedDimension)) state.previewMaxDimension = savedDimension; } catch (_) {}
   try { const savedSort = localStorage.getItem('ezPreviewMediaSort'); if (['name-asc', 'name-desc', 'created-desc', 'created-asc'].includes(savedSort)) state.mediaSort = savedSort; } catch (_) {}
   try { const savedLanguage = localStorage.getItem('ezPreviewLanguage'); if (['en', 'ko'].includes(savedLanguage)) state.language = savedLanguage; } catch (_) {}
 
   // Bilingual UI: translate stable source strings while preserving original text for lossless switching.
-  const translationPairs = [["COLOR WORKSPACE","컬러 워크스페이스"],["Video Add","영상 추가"],["Add one or more videos","하나 이상의 영상 추가"],["Add videos","영상 추가"],["Open a video","영상 열기"],["Drop a video here or choose a file.","여기에 영상을 놓거나 파일을 선택하세요."],["Camera files*","카메라 영상*"],["*Unsupported clips can automatically try a compatibility preview.","*지원하지 않는 영상은 호환 프리뷰 변환을 자동으로 시도할 수 있습니다."],["Open LUT library","LUT 라이브러리 열기"],["Toggle selected LUT","선택한 LUT 켜기/끄기"],["LUT off","LUT 꺼짐"],["Disable color adjustments","색상 조정 끄기"],["Enable color adjustments","색상 조정 켜기"],["Color adjustments on","색상 조정 켜짐"],["Color adjustments off","색상 조정 꺼짐"],["Color adjustments","색상 조정"],["Preview aspect ratio","프리뷰 종횡비"],["Source","원본 비율"],["Preview resolution","프리뷰 해상도"],["Preview resolution on long edge","긴 변 기준 프리뷰 해상도"],["No LUT loaded","LUT 없음"],["Toggle video technical info","영상 기술 정보 표시/숨기기"],["Video technical info (I)","영상 기술 정보 (I)"],["Keyboard shortcuts (?)","키보드 단축키 (?)"],["Toggle original and graded view","원본/보정 화면 전환"],["A/B grade bypass (O)","A/B 원본 비교 (O)"],["Switch interface to Korean","인터페이스를 한국어로 전환"],["Switch interface to English","인터페이스를 영어로 전환"],["Switch interface language","인터페이스 언어 전환"],["MEDIA LIBRARY","미디어 라이브러리"],["Media Browser","미디어 브라우저"],["Media Bin (M)","미디어 빈 (M)"],["Open Media Bin","미디어 빈 열기"],["Collapse Media Browser","미디어 브라우저 접기"],["Add video","영상 추가"],["Add folder","폴더 추가"],["FOLDERS","폴더"],["All clips","전체 클립"],["Imported folders will appear here.","가져온 폴더가 여기에 표시됩니다."],["Folders and subfolders will appear here after import.","가져온 폴더와 하위 폴더가 여기에 표시됩니다."],["ALL CLIPS","전체 클립"],["FOLDER","폴더"],["Name A–Z","이름 A–Z"],["Name Z–A","이름 Z–A"],["Date newest","최신 날짜순"],["Date oldest","오래된 날짜순"],["Sort clips","클립 정렬"],["Sort by filename or file creation date (modified date if creation time is unavailable)","파일명 또는 생성 날짜순 정렬 (생성 날짜가 없으면 수정 날짜 사용)"],["Add videos or import a folder. Clips will appear here.","영상을 추가하거나 폴더를 가져오세요. 클립이 여기에 표시됩니다."],["No clips in this folder.","이 폴더에 영상이 없습니다."],["Background queue ready","백그라운드 큐 준비 완료"],["Prepare clips in the background, one at a time.","클립을 백그라운드에서 하나씩 준비합니다."],["Pause queue","큐 일시정지"],["Pause after current","현재 작업 후 일시정지"],["Retry failed","실패 항목 재시도"],["Cancel queue","큐 취소"],["Proxy cache · loading","프록시 캐시 · 불러오는 중"],["Clear cache","캐시 비우기"],["Remove cached proxy files (the active proxy is kept)","캐시된 프록시 파일 삭제 (현재 사용 중인 프록시는 유지)"],["MEDIA INFO","미디어 정보"],["Analyzing video metadata…","영상 정보 분석 중…"],["Resolution","해상도"],["Frame rate","프레임레이트"],["Video codec","영상 코덱"],["Pixel format","픽셀 포맷"],["Audio","오디오"],["Duration","재생 시간"],["File size","파일 크기"],["Color space","색공간"],["ORIGINAL","원본"],["ADJUSTED","조정됨"],["Fullscreen preview (F)","전체화면 프리뷰 (F)"],["Exit fullscreen preview (Esc)","전체화면 프리뷰 종료 (Esc)"],["Exit fullscreen preview","전체화면 프리뷰 종료"],["Fullscreen preview","전체화면 프리뷰"],["Waveform · Luma","파형 · 휘도"],["RGB Parade","RGB 퍼레이드"],["RGB Histogram","RGB 히스토그램"],["Vectorscope","벡터스코프"],["Close scopes","스코프 닫기"],["Scope type","스코프 유형"],["Luma · IRE · Displayed frame","휘도 · IRE · 표시 중인 프레임"],["Split line","분할선"],["Split line settings","분할선 설정"],["Orientation","방향"],["Left / Right","좌 / 우"],["Top / Bottom","상 / 하"],["Swap","위치 교환"],["Center","중앙"],["Line width","선 두께"],["Line color","선 색상"],["Custom split line color","분할선 색상 직접 선택"],["Switch horizontal/vertical","가로/세로 전환"],["Switch to top/bottom","상/하 분할로 전환"],["Switch to left/right","좌/우 분할로 전환"],["Disable split comparison","분할 비교 끄기"],["Enable split comparison","분할 비교 켜기"],["Split comparison","분할 비교"],["Toggle split comparison","분할 비교 전환"],["Split comparison controls","분할 비교 컨트롤"],["Adjustments","조정"],["Reset all adjustments","모든 조정값 초기화"],["Reset adjustments","조정값 초기화"],["Exposure","노출"],["Contrast","대비"],["Saturation","채도"],["Temperature","색온도"],["Tint","틴트"],["Adjustments are a real-time preview pass, applied after the LUT when enabled.","조정 기능을 켜면 LUT 적용 후 프리뷰에 실시간으로 반영됩니다."],["LUT Library","LUT 라이브러리"],["Local LUT collection · favorite LUTs can be cycled with [ and ].","로컬 LUT 모음 · [ / ] 키로 즐겨찾기 LUT를 전환할 수 있습니다."],["☆ Favorites","☆ 즐겨찾기"],["＋ Add LUT","＋ LUT 추가"],["Close LUT library","LUT 라이브러리 닫기"],["LUT enabled","LUT 켜짐"],["LUT disabled","LUT 꺼짐"],["Retry compatibility preview · FFmpeg","호환 프리뷰 다시 만들기 · FFmpeg"],["Copy codec report","코덱 보고서 복사"],["Close","닫기"],["Keyboard shortcuts","키보드 단축키"],["Play / pause","재생 / 일시정지"],["Step one frame","한 프레임 이동"],["Video technical info","영상 기술 정보"],["Original / graded A/B","원본 / 보정 A/B"],["Scopes","스코프"],["Media Browser · folders, clips and proxy queue","미디어 브라우저 · 폴더, 클립, 프록시 큐"],["Export original-resolution PNG","원본 해상도 PNG 내보내기"],["Previous / next favorite LUT","이전 / 다음 즐겨찾기 LUT"],["Exit fullscreen / close dialog","전체화면 종료 / 대화상자 닫기"],["Video preview area","영상 미리보기 영역"],["LUT graded preview","LUT 적용 미리보기"],["Split position","분할 위치"],["Switch split orientation","분할 방향 전환"],["Could not open video.","영상을 열 수 없습니다."],["Open a video first.","먼저 영상을 열어 주세요."],["Wait for the preview conversion to finish before exporting PNG.","프리뷰 변환이 끝난 뒤 PNG를 추출해 주세요."],["Reading video metadata. Please try again shortly.","영상 정보를 읽는 중입니다. 잠시 후 다시 시도해 주세요."],["Playback could not start. Check whether the video codec is supported.","재생을 시작하지 못했습니다. 영상 코덱 지원 여부를 확인해 주세요."],["Aspect ratio: Source","프레임 비율: 원본"],["Fullscreen preview is not supported in this environment.","이 환경에서는 전체화면 프리뷰를 지원하지 않습니다."],["Could not change fullscreen mode:","전체화면 전환 실패:"],["A/B compare · Original","A/B 비교 · 원본"],["A/B compare · Graded","A/B 비교 · 보정"],["Split comparison on. Drag the divider to compare.","분할 비교 켜짐. 경계선을 드래그해 비교하세요."],["Split comparison off","분할 비교 꺼짐"],["Color adjustments enabled","색상 조정 켜짐"],["Color adjustments bypassed","색상 조정 우회"],["Original-resolution PNG export failed.","원본 해상도 PNG 내보내기에 실패했습니다."],["PNG export canceled.","PNG 내보내기를 취소했습니다."],["Original-resolution PNG saved","원본 해상도 PNG 저장 완료"],["Removed from Media Browser","미디어 브라우저에서 제거됨"],["Loading video…","영상을 불러오는 중입니다."],["Select a video.","영상을 선택해 주세요."],["Retry compatibility preview","호환 프리뷰 다시 시도"],["Reset color adjustments","색상 조정 초기화"],["Extracting the original frame and applying grading…","원본 프레임을 추출하고 색보정을 적용하는 중…"],["＋ Add video","＋ 영상 추가"],["▣ Add folder","▣ 폴더 추가"],["◫　Split line","◫　분할선"],["☷　Adjustments","☷　조정"],["⇄　Swap","⇄　위치 교환"],["⟲　Center","⟲　중앙"],["Import a folder of videos","영상 폴더 가져오기"],["LUT controls","LUT 컨트롤"],["Scopes and color adjustments","스코프 및 색상 조정"],["Scopes (X)","스코프 (X)"],["Color adjustment controls","색상 조정 컨트롤"],["Export original-resolution PNG (P)","원본 해상도 PNG 내보내기 (P)"],["Collapse sidebar","사이드바 접기"],["Imported folders","가져온 폴더"],["Background proxy queue","백그라운드 프록시 큐"],["Video scopes","영상 스코프"],["Waveform / Luma","파형 / 휘도"],["Close split settings","분할 설정 닫기"],["Swap LUT and original sides","LUT와 원본 위치 바꾸기"],["Reset split position","분할 위치 초기화"],["Split line width","분할선 두께"],["Amber","앰버"],["Cyan","시안"],["White","흰색"],["Red","빨강"],["Green","초록"],["Violet","보라"],["Close adjustments","조정 패널 닫기"],["Color temperature","색온도"],["Playback","재생"],["Video navigation","영상 탐색"],["Mute audio","오디오 음소거"],["Volume","볼륨"],["Close shortcuts","단축키 닫기"],["Language","언어"],["Original frame is being extracted and graded…","원본 프레임을 추출하고 색보정을 적용하는 중…"],["Background queue paused","백그라운드 큐 일시정지"],["Current preview has priority","현재 프리뷰 우선 처리"],["One proxy at a time · current clip stays responsive","프록시를 한 번에 하나씩 생성 · 현재 클립은 계속 반응합니다."],["Current clip","현재 클립"],["Queued for background preview","백그라운드 프리뷰 대기 중"],["Canceled · retry available","취소됨 · 재시도 가능"],["Retry available","재시도 가능"],["Ready","준비 완료"],["Failed","실패"],["Preparing","준비 중"],["Play","재생"],["Pause","일시정지"],["Hide scopes","스코프 숨기기"],["Show scopes","스코프 표시"],["Bundled LUT payload: seeded into the persistent browser library once.","내장 LUT 데이터: 영구 브라우저 라이브러리에 최초 한 번 등록됩니다."],["MP4 · MOV · MXF · MKV · AVI · Camera files*","MP4 · MOV · MXF · MKV · AVI · 카메라 영상*"],["Background proxy queue canceled. You can retry canceled items later.","백그라운드 프록시 큐를 취소했습니다. 취소된 항목은 나중에 다시 시도할 수 있습니다."],["Proxy cache is available in desktop mode only.","프록시 캐시는 데스크톱 모드에서만 사용할 수 있습니다."],["Wait for active proxy conversion to finish before clearing the cache.","캐시를 비우기 전에 진행 중인 프록시 변환이 끝날 때까지 기다려 주세요."],["Wait for the current preview conversion to finish, then switch clips.","현재 프리뷰 변환이 끝난 뒤 클립을 전환해 주세요."],["No favorite LUTs yet. Star a LUT in the LUT Library first.","즐겨찾기 LUT가 없습니다. LUT 라이브러리에서 별표를 눌러 등록하세요."],["Background proxy queue resumed.","백그라운드 프록시 큐를 다시 시작했습니다."],["Queue will pause after the current clip finishes.","현재 클립 처리가 끝나면 큐를 일시정지합니다."],["Native preview failed. See the diagnostic panel for details.","네이티브 프리뷰에 실패했습니다. 자세한 내용은 진단 패널을 확인하세요."],["Could not create a compatible preview. See the diagnostic panel and retry if this was a network/startup issue.","호환 프리뷰를 만들지 못했습니다. 진단 패널을 확인하고 네트워크 또는 시작 오류였다면 다시 시도하세요."],["Load a video before enabling split comparison.","분할 비교를 켜기 전에 영상을 불러오세요."],["LUT is on. It will be applied when a video is loaded.","LUT가 켜져 있습니다. 영상을 불러오면 적용됩니다."],["LUT is off.","LUT가 꺼져 있습니다."],["Wait for the background queue to finish the current clip before exporting PNG.","PNG를 내보내기 전에 백그라운드 큐의 현재 클립 처리가 끝날 때까지 기다려 주세요."],["No video frame available for PNG export.","PNG로 내보낼 수 있는 영상 프레임이 없습니다."],["Could not create PNG image.","PNG 이미지를 만들 수 없습니다."],["PNG saved with the split divider.","분할선을 포함해 PNG를 저장했습니다."],["PNG snapshot saved.","PNG 스냅샷을 저장했습니다."],["Clipboard access was blocked. The report is still visible in the diagnostic panel.","클립보드 접근이 차단되었습니다. 보고서는 진단 패널에서 계속 확인할 수 있습니다."],["Original video","원본 영상"],["Codec report copied to clipboard.","코덱 보고서를 클립보드에 복사했습니다."],["Adjustments reset","조정값을 초기화했습니다."],["Quick Sequence · cut & dissolve (S)","퀵 시퀀스 · 컷 & 디졸브 (S)"],["Quick Sequence · cut & dissolve","퀵 시퀀스 · 컷 & 디졸브"],["SEQUENCE","시퀀스"],["Play connected clips in sequence","시퀀스 연속 재생"],["Add all clips from Media Browser","미디어 브라우저의 모든 클립 추가"],["Clear sequence","시퀀스 비우기"],["Click + on clips in Media Browser to connect cuts & dissolves.","미디어 브라우저 클립의 + 버튼을 눌러 컷과 디졸브를 연결하세요."],["Add to Sequence","시퀀스에 추가"],["Clear","비우기"]];
+  const translationPairs = [["COLOR WORKSPACE","컬러 워크스페이스"],["Video Add","영상 추가"],["Add one or more videos","하나 이상의 영상 추가"],["Add videos","영상 추가"],["Open a video","영상 열기"],["Drop a video here or choose a file.","여기에 영상을 놓거나 파일을 선택하세요."],["Camera files*","카메라 영상*"],["*Unsupported clips can automatically try a compatibility preview.","*지원하지 않는 영상은 호환 프리뷰 변환을 자동으로 시도할 수 있습니다."],["Open LUT library","LUT 라이브러리 열기"],["Toggle selected LUT","선택한 LUT 켜기/끄기"],["LUT off","LUT 꺼짐"],["Disable color adjustments","색상 조정 끄기"],["Enable color adjustments","색상 조정 켜기"],["Color adjustments on","색상 조정 켜짐"],["Color adjustments off","색상 조정 꺼짐"],["Color adjustments","색상 조정"],["Preview aspect ratio","프리뷰 종횡비"],["Source","원본 비율"],["Preview resolution","프리뷰 해상도"],["Preview resolution on long edge","긴 변 기준 프리뷰 해상도"],["No LUT loaded","LUT 없음"],["Toggle video technical info","영상 기술 정보 표시/숨기기"],["Video technical info (I)","영상 기술 정보 (I)"],["Keyboard shortcuts (?)","키보드 단축키 (?)"],["Toggle original and graded view","원본/보정 화면 전환"],["A/B grade bypass (O)","A/B 원본 비교 (O)"],["Switch interface to Korean","인터페이스를 한국어로 전환"],["Switch interface to English","인터페이스를 영어로 전환"],["Switch interface language","인터페이스 언어 전환"],["MEDIA LIBRARY","미디어 라이브러리"],["Media Browser","미디어 브라우저"],["Media Bin (M)","미디어 빈 (M)"],["Open Media Bin","미디어 빈 열기"],["Collapse Media Browser","미디어 브라우저 접기"],["Add video","영상 추가"],["Add folder","폴더 추가"],["FOLDERS","폴더"],["All clips","전체 클립"],["Imported folders will appear here.","가져온 폴더가 여기에 표시됩니다."],["Folders and subfolders will appear here after import.","가져온 폴더와 하위 폴더가 여기에 표시됩니다."],["ALL CLIPS","전체 클립"],["FOLDER","폴더"],["Name A–Z","이름 A–Z"],["Name Z–A","이름 Z–A"],["Date newest","최신 날짜순"],["Date oldest","오래된 날짜순"],["Sort clips","클립 정렬"],["Sort by filename or file creation date (modified date if creation time is unavailable)","파일명 또는 생성 날짜순 정렬 (생성 날짜가 없으면 수정 날짜 사용)"],["Add videos or import a folder. Clips will appear here.","영상을 추가하거나 폴더를 가져오세요. 클립이 여기에 표시됩니다."],["No clips in this folder.","이 폴더에 영상이 없습니다."],["Background queue ready","백그라운드 큐 준비 완료"],["Prepare clips in the background, one at a time.","클립을 백그라운드에서 하나씩 준비합니다."],["Pause queue","큐 일시정지"],["Pause after current","현재 작업 후 일시정지"],["Retry failed","실패 항목 재시도"],["Cancel queue","큐 취소"],["Proxy cache · loading","프록시 캐시 · 불러오는 중"],["Clear cache","캐시 비우기"],["Remove cached proxy files (the active proxy is kept)","캐시된 프록시 파일 삭제 (현재 사용 중인 프록시는 유지)"],["MEDIA INFO","미디어 정보"],["Analyzing video metadata…","영상 정보 분석 중…"],["Resolution","해상도"],["Frame rate","프레임레이트"],["Video codec","영상 코덱"],["Pixel format","픽셀 포맷"],["Audio","오디오"],["Duration","재생 시간"],["File size","파일 크기"],["Color space","색공간"],["ORIGINAL","원본"],["ADJUSTED","조정됨"],["Fullscreen preview (F)","전체화면 프리뷰 (F)"],["Exit fullscreen preview (Esc)","전체화면 프리뷰 종료 (Esc)"],["Exit fullscreen preview","전체화면 프리뷰 종료"],["Fullscreen preview","전체화면 프리뷰"],["Waveform · Luma","파형 · 휘도"],["RGB Parade","RGB 퍼레이드"],["RGB Histogram","RGB 히스토그램"],["Vectorscope","벡터스코프"],["Close scopes","스코프 닫기"],["Scope type","스코프 유형"],["Luma · IRE · Displayed frame","휘도 · IRE · 표시 중인 프레임"],["Split line","분할선"],["Split line settings","분할선 설정"],["Orientation","방향"],["Left / Right","좌 / 우"],["Top / Bottom","상 / 하"],["Swap","위치 교환"],["Center","중앙"],["Line width","선 두께"],["Line color","선 색상"],["Custom split line color","분할선 색상 직접 선택"],["Switch horizontal/vertical","가로/세로 전환"],["Switch to top/bottom","상/하 분할로 전환"],["Switch to left/right","좌/우 분할로 전환"],["Disable split comparison","분할 비교 끄기"],["Enable split comparison","분할 비교 켜기"],["Split comparison","분할 비교"],["Toggle split comparison","분할 비교 전환"],["Split comparison controls","분할 비교 컨트롤"],["Adjustments","조정"],["Reset all adjustments","모든 조정값 초기화"],["Reset adjustments","조정값 초기화"],["Exposure","노출"],["Contrast","대비"],["Saturation","채도"],["Temperature","색온도"],["Tint","틴트"],["Adjustments are a real-time preview pass, applied after the LUT when enabled.","조정 기능을 켜면 LUT 적용 후 프리뷰에 실시간으로 반영됩니다."],["LUT Library","LUT 라이브러리"],["Local LUT collection · favorite LUTs can be cycled with [ and ].","로컬 LUT 모음 · [ / ] 키로 즐겨찾기 LUT를 전환할 수 있습니다."],["☆ Favorites","☆ 즐겨찾기"],["＋ Add LUT","＋ LUT 추가"],["Close LUT library","LUT 라이브러리 닫기"],["LUT enabled","LUT 켜짐"],["LUT disabled","LUT 꺼짐"],["Retry compatibility preview · FFmpeg","호환 프리뷰 다시 만들기 · FFmpeg"],["Copy codec report","코덱 보고서 복사"],["Close","닫기"],["Keyboard shortcuts","키보드 단축키"],["Play / pause","재생 / 일시정지"],["Step one frame","한 프레임 이동"],["Video technical info","영상 기술 정보"],["Original / graded A/B","원본 / 보정 A/B"],["Scopes","스코프"],["Media Browser · folders, clips and proxy queue","미디어 브라우저 · 폴더, 클립, 프록시 큐"],["Export original-resolution PNG","원본 해상도 PNG 내보내기"],["Previous / next favorite LUT","이전 / 다음 즐겨찾기 LUT"],["Exit fullscreen / close dialog","전체화면 종료 / 대화상자 닫기"],["Video preview area","영상 미리보기 영역"],["LUT graded preview","LUT 적용 미리보기"],["Split position","분할 위치"],["Switch split orientation","분할 방향 전환"],["Could not open video.","영상을 열 수 없습니다."],["Open a video first.","먼저 영상을 열어 주세요."],["Wait for the preview conversion to finish before exporting PNG.","프리뷰 변환이 끝난 뒤 PNG를 추출해 주세요."],["Reading video metadata. Please try again shortly.","영상 정보를 읽는 중입니다. 잠시 후 다시 시도해 주세요."],["Playback could not start. Check whether the video codec is supported.","재생을 시작하지 못했습니다. 영상 코덱 지원 여부를 확인해 주세요."],["Aspect ratio: Source","프레임 비율: 원본"],["Fullscreen preview is not supported in this environment.","이 환경에서는 전체화면 프리뷰를 지원하지 않습니다."],["Could not change fullscreen mode:","전체화면 전환 실패:"],["A/B compare · Original","A/B 비교 · 원본"],["A/B compare · Graded","A/B 비교 · 보정"],["Split comparison on. Drag the divider to compare.","분할 비교 켜짐. 경계선을 드래그해 비교하세요."],["Split comparison off","분할 비교 꺼짐"],["Color adjustments enabled","색상 조정 켜짐"],["Color adjustments bypassed","색상 조정 우회"],["Original-resolution PNG export failed.","원본 해상도 PNG 내보내기에 실패했습니다."],["PNG export canceled.","PNG 내보내기를 취소했습니다."],["Original-resolution PNG saved","원본 해상도 PNG 저장 완료"],["Removed from Media Browser","미디어 브라우저에서 제거됨"],["Loading video…","영상을 불러오는 중입니다."],["Select a video.","영상을 선택해 주세요."],["Retry compatibility preview","호환 프리뷰 다시 시도"],["Reset color adjustments","색상 조정 초기화"],["Extracting the original frame and applying grading…","원본 프레임을 추출하고 색보정을 적용하는 중…"],["＋ Add video","＋ 영상 추가"],["▣ Add folder","▣ 폴더 추가"],["◫　Split line","◫　분할선"],["☷　Adjustments","☷　조정"],["⇄　Swap","⇄　위치 교환"],["⟲　Center","⟲　중앙"],["Import a folder of videos","영상 폴더 가져오기"],["LUT controls","LUT 컨트롤"],["Scopes and color adjustments","스코프 및 색상 조정"],["Scopes (X)","스코프 (X)"],["Color adjustment controls","색상 조정 컨트롤"],["Export original-resolution PNG (P)","원본 해상도 PNG 내보내기 (P)"],["Collapse sidebar","사이드바 접기"],["Imported folders","가져온 폴더"],["Background proxy queue","백그라운드 프록시 큐"],["Video scopes","영상 스코프"],["Waveform / Luma","파형 / 휘도"],["Close split settings","분할 설정 닫기"],["Swap LUT and original sides","LUT와 원본 위치 바꾸기"],["Reset split position","분할 위치 초기화"],["Split line width","분할선 두께"],["Amber","앰버"],["Cyan","시안"],["White","흰색"],["Red","빨강"],["Green","초록"],["Violet","보라"],["Close adjustments","조정 패널 닫기"],["Color temperature","색온도"],["Playback","재생"],["Video navigation","영상 탐색"],["Mute audio","오디오 음소거"],["Volume","볼륨"],["Close shortcuts","단축키 닫기"],["Language","언어"],["Original frame is being extracted and graded…","원본 프레임을 추출하고 색보정을 적용하는 중…"],["Background queue paused","백그라운드 큐 일시정지"],["Current preview has priority","현재 프리뷰 우선 처리"],["One proxy at a time · current clip stays responsive","프록시를 한 번에 하나씩 생성 · 현재 클립은 계속 반응합니다."],["Current clip","현재 클립"],["Queued for background preview","백그라운드 프리뷰 대기 중"],["Canceled · retry available","취소됨 · 재시도 가능"],["Retry available","재시도 가능"],["Ready","준비 완료"],["Failed","실패"],["Preparing","준비 중"],["Play","재생"],["Pause","일시정지"],["Hide scopes","스코프 숨기기"],["Show scopes","스코프 표시"],["Bundled LUT payload: seeded into the persistent browser library once.","내장 LUT 데이터: 영구 브라우저 라이브러리에 최초 한 번 등록됩니다."],["MP4 · MOV · MXF · MKV · AVI · Camera files*","MP4 · MOV · MXF · MKV · AVI · 카메라 영상*"],["Background proxy queue canceled. You can retry canceled items later.","백그라운드 프록시 큐를 취소했습니다. 취소된 항목은 나중에 다시 시도할 수 있습니다."],["Proxy cache is available in desktop mode only.","프록시 캐시는 데스크톱 모드에서만 사용할 수 있습니다."],["Wait for active proxy conversion to finish before clearing the cache.","캐시를 비우기 전에 진행 중인 프록시 변환이 끝날 때까지 기다려 주세요."],["Wait for the current preview conversion to finish, then switch clips.","현재 프리뷰 변환이 끝난 뒤 클립을 전환해 주세요."],["No favorite LUTs yet. Star a LUT in the LUT Library first.","즐겨찾기 LUT가 없습니다. LUT 라이브러리에서 별표를 눌러 등록하세요."],["Background proxy queue resumed.","백그라운드 프록시 큐를 다시 시작했습니다."],["Queue will pause after the current clip finishes.","현재 클립 처리가 끝나면 큐를 일시정지합니다."],["Native preview failed. See the diagnostic panel for details.","네이티브 프리뷰에 실패했습니다. 자세한 내용은 진단 패널을 확인하세요."],["Could not create a compatible preview. See the diagnostic panel and retry if this was a network/startup issue.","호환 프리뷰를 만들지 못했습니다. 진단 패널을 확인하고 네트워크 또는 시작 오류였다면 다시 시도하세요."],["Load a video before enabling split comparison.","분할 비교를 켜기 전에 영상을 불러오세요."],["LUT is on. It will be applied when a video is loaded.","LUT가 켜져 있습니다. 영상을 불러오면 적용됩니다."],["LUT is off.","LUT가 꺼져 있습니다."],["Wait for the background queue to finish the current clip before exporting PNG.","PNG를 내보내기 전에 백그라운드 큐의 현재 클립 처리가 끝날 때까지 기다려 주세요."],["No video frame available for PNG export.","PNG로 내보낼 수 있는 영상 프레임이 없습니다."],["Could not create PNG image.","PNG 이미지를 만들 수 없습니다."],["PNG saved with the split divider.","분할선을 포함해 PNG를 저장했습니다."],["PNG snapshot saved.","PNG 스냅샷을 저장했습니다."],["Clipboard access was blocked. The report is still visible in the diagnostic panel.","클립보드 접근이 차단되었습니다. 보고서는 진단 패널에서 계속 확인할 수 있습니다."],["Original video","원본 영상"],["Codec report copied to clipboard.","코덱 보고서를 클립보드에 복사했습니다."],["Adjustments reset","조정값을 초기화했습니다."],["Quick Sequence · cut & dissolve (S)","퀵 시퀀스 · 컷 & 디졸브 (S)"],["Quick Sequence · cut & dissolve","퀵 시퀀스 · 컷 & 디졸브"],["SEQUENCE","시퀀스"],["Play connected clips in sequence","시퀀스 연속 재생"],["Add all clips from Media Browser","미디어 브라우저의 모든 클립 추가"],["Clear sequence","시퀀스 비우기"],["Click + on clips in Media Browser to connect cuts & dissolves.","미디어 브라우저 클립의 + 버튼을 눌러 컷과 디졸브를 연결하세요."],["Add to Sequence","시퀀스에 추가"],["Clear","비우기"],["Timeline","타임라인"],["TIMELINE","타임라인"],["▶ Play Timeline","▶ 타임라인 재생"],["■ Exit Timeline","■ 타임라인 종료"],["+ Add All","+ 전체 추가"],["Export MP4","MP4 내보내기"],["Zoom","확대"],["Resume queue","큐 재개"],["Imported files","가져온 파일"],["Queue ▾","큐 ▾"],["Queue ▴","큐 ▴"],["Click + on clips in Media Browser or + Add All to assemble a single-track sequence.","미디어 브라우저에서 + 버튼을 누르거나 '+ 전체 추가'로 타임라인을 구성하세요."],["In","시작"],["Out","끝"]];
   const enToKo = new Map(translationPairs);
   const koToEn = new Map(translationPairs.map(([en, ko]) => [ko, en]));
   const translatedTextNodes = new WeakMap();
@@ -944,6 +1011,8 @@
       const empty = document.createElement('div'); empty.className = 'media-folder-empty';
       empty.textContent = 'Folders and subfolders will appear here after import.';
       tree.replaceChildren(empty);
+      const folderSection = tree.closest ? tree.closest('.media-folder-section') : null;
+      if (folderSection && folderSection.classList) folderSection.classList.add('is-auto-hidden');
       return;
     }
     const folderRows = [];
@@ -954,11 +1023,17 @@
         collectChildren(rootKey, child.children, depth + 1);
       }
     };
-    for (const root of mediaFolderModel()) {
+    const roots = mediaFolderModel();
+    for (const root of roots) {
       folderRows.push(makeFolderRow({ label: root.name, rootKey: root.key, relativeFolder: '', count: root.count, depth: 0, root: true }));
       collectChildren(root.key, root.children, 1);
     }
     tree.replaceChildren(...folderRows);
+    const folderSection = tree.closest ? tree.closest('.media-folder-section') : null;
+    if (folderSection && folderSection.classList) {
+      const hasRealFolders = roots.some(r => r.key !== '__imported_files__' || r.children.size > 0);
+      folderSection.classList.toggle('is-auto-hidden', !hasRealFolders);
+    }
   }
   function mediaCreatedTimestamp(item) {
     const candidates = [item?.createdAt, item?.file?.lastModified, item?.addedAt];
@@ -1491,6 +1566,10 @@
     icon.title = muted ? 'Unmute audio' : 'Mute audio';
   }
   function updateProgress() {
+    if (state.sequenceMode) {
+      if (state.scopeOpen && video.readyState >= 2 && !video.paused) scheduleScopeDraw();
+      return;
+    }
     $('currentTime').textContent = timecode(video.currentTime);
     $('duration').textContent = timecode(video.duration);
     if (!state.seekingByUser && Number.isFinite(video.duration) && video.duration > 0) seek.value = String(Math.round(video.currentTime / video.duration * 1000));
@@ -1713,10 +1792,9 @@
   }
 
   function compatibilityProxyStatusLabel() {
-    const dimension = `${state.previewMaxDimension} px`;
-    return window.ezNative?.isDesktop
-      ? `Native FFmpeg proxy · max ${dimension} · max 30 fps · audio included when available · original unchanged`
-      : `Quick compatibility proxy · max ${dimension} · max 30 fps · audio included when available · original unchanged`;
+    return state.language === 'ko'
+      ? `프록시 재생 · ${state.previewMaxDimension}px · 30fps (원본 무손실)`
+      : `Proxy · ${state.previewMaxDimension}px · 30fps (original unchanged)`;
   }
 
   function updatePreviewResolutionControl() {
@@ -3098,6 +3176,8 @@
       bar.classList.toggle('open', state.sequenceOpen);
       bar.setAttribute('aria-hidden', String(!state.sequenceOpen));
     }
+    const appEl = document.querySelector('.app');
+    if (appEl) appEl.classList.toggle('timeline-open', state.sequenceOpen);
     const btn = $('sequenceBtn');
     if (btn) {
       btn.classList.toggle('primary', state.sequenceOpen || state.sequenceMode);
@@ -3347,7 +3427,12 @@
     if ($('sequenceBtn')) $('sequenceBtn').classList.toggle('primary', state.sequenceOpen || state.sequenceMode);
 
     const vpW = $('tlViewport')?.clientWidth || 800;
-    const contentW = Math.max(vpW, Math.ceil((layout.totalDuration + 2) * state.seqPxPerSec));
+    if (!state.seqUserZoomed && layout.totalDuration > 0) {
+      const autoPx = Math.max(16, Math.min(110, Math.floor((vpW * 0.82) / layout.totalDuration)));
+      state.seqPxPerSec = autoPx;
+      if ($('tlZoomRange')) $('tlZoomRange').value = String(autoPx);
+    }
+    const contentW = Math.max(vpW, Math.ceil((layout.totalDuration + 1.5) * state.seqPxPerSec));
     canvas.style.width = `${contentW}px`;
     renderTimelineRuler(layout.totalDuration, contentW);
 
@@ -3368,6 +3453,10 @@
       clipEl.className = `tl-clip${state.sequenceMode && idx === state.sequenceIndex ? ' active' : ''}`;
       clipEl.style.left = `${seg.start * px}px`;
       clipEl.style.width = `${Math.max(28, seg.duration * px)}px`;
+      const prevSeg = idx > 0 ? layout.segments[idx - 1] : null;
+      if (prevSeg && prevSeg.overlap > 0) {
+        clipEl.style.paddingLeft = `${Math.min(72, Math.max(26, Math.round(prevSeg.overlap * px) + 8))}px`;
+      }
       clipEl.addEventListener('click', () => {
         if (state.sequenceItems.length >= 2) {
           state.sequenceMode = true;
@@ -3968,6 +4057,7 @@
     toast(state.language === 'ko' ? `${visible.length}개 클립을 타임라인에 추가했습니다.` : `Added ${visible.length} clips to Timeline.`);
   });
   $('tlZoomRange').addEventListener('input', e => {
+    state.seqUserZoomed = true;
     state.seqPxPerSec = Number(e.target.value) || 44;
     renderSequenceBar();
     const layout = computeSequenceLayout(state.sequenceItems);
@@ -4005,6 +4095,16 @@
   $('closeMediaBinBtn').addEventListener('click', () => toggleMediaBin(false));
   $('mediaFolderAllBtn').addEventListener('click', () => { state.selectedMediaFolder = null; renderMediaBin(); });
   $('clearProxyCacheBtn').addEventListener('click', clearProxyCache);
+  if ($('proxyQueueDrawerBtn')) {
+    $('proxyQueueDrawerBtn').addEventListener('click', () => {
+      const panel = document.querySelector('.proxy-queue-panel');
+      if (!panel) return;
+      const opening = !panel.classList.contains('is-expanded');
+      panel.classList.toggle('is-expanded', opening);
+      $('proxyQueueDrawerBtn').setAttribute('aria-expanded', String(opening));
+      $('proxyQueueDrawerBtn').textContent = opening ? (state.language === 'ko' ? '큐 ▴' : 'Queue ▴') : (state.language === 'ko' ? '큐 ▾' : 'Queue ▾');
+    });
+  }
   $('gradeBypassBtn').addEventListener('click', () => toggleGradeBypass());
   $('videoInfoBtn').addEventListener('click', () => toggleVideoInfo());
   $('fullscreenBtn').addEventListener('click', () => togglePreviewFullscreen());

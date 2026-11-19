@@ -56,6 +56,7 @@ function createWindow() {
     minHeight: 680,
     backgroundColor: '#09090b',
     title: 'EZ Preview',
+    autoHideMenuBar: true,
     show: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.cjs'),
@@ -66,6 +67,7 @@ function createWindow() {
     }
   });
 
+  if (process.platform !== 'darwin') mainWindow.setMenuBarVisibility(false);
   mainWindow.once('ready-to-show', () => mainWindow && mainWindow.show());
   mainWindow.webContents.setWindowOpenHandler(() => ({ action: 'deny' }));
   mainWindow.webContents.on('will-navigate', (event, navigationUrl) => {
