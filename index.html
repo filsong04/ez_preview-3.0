@@ -3820,7 +3820,7 @@ html,body,.app{background:#121212!important;color:#e2e2e2!important}
         }
       });
       if (result?.cancelled) { toast('PNG export canceled.'); return { handled: true }; }
-      toast(state.language === 'ko' ? `원본 해상도 PNG 저장 완료 · ${fmtBytes(result.outputBytes || 0)}` : `Original-resolution PNG saved · ${fmtBytes(result.outputBytes || 0)}`, 4200);
+      const fmtTag = result.format || 'JPG'; toast(state.language === 'ko' ? `원본 해상도 ${fmtTag} 저장 완료 · ${fmtBytes(result.outputBytes || 0)}` : `Original-resolution ${fmtTag} saved · ${fmtBytes(result.outputBytes || 0)}`, 4200);
       return { handled: true };
     } catch (error) {
       console.warn('Original-resolution PNG export unavailable; falling back to preview capture:', error);

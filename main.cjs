@@ -379,7 +379,7 @@ function buildExportCubeText(lutText, useLut, adjustmentInput) {
     || Math.abs(adjustments.temperature) > 1e-6
     || Math.abs(adjustments.tint) > 1e-6;
   const cube = useLut ? parseCubeText(lutText) : {
-    size: hasAdjustments ? 49 : 33,
+    size: 33,
     domainMin: [0, 0, 0],
     domainMax: [1, 1, 1],
     entries: []
@@ -426,8 +426,8 @@ function buildExportCubeText(lutText, useLut, adjustmentInput) {
       Math.max(0, Math.min(1, b))
     ]);
   } else if (useLut) {
-    // Bake the LUT plus adjustments into a 49^3 dense cube (fast bake + high accuracy).
-    outputSize = 49;
+    // Bake the LUT plus adjustments into a fast 33^3 cube for rapid still/sequence export.
+    outputSize = 33;
     const maxIndex = cube.size - 1;
     const entryAt = (r, g, b) => cube.entries[b * cube.size * cube.size + g * cube.size + r];
     const sampleOriginalCube = (r, g, b) => {
@@ -909,19 +909,23 @@ ipcMain.handle('ez-native:export-original-frame', async (event, payload) => {
   const timeSeconds = safeNumber(payload && payload.timeSeconds, 0, 0, 1e8);
   const sourceBase = path.basename(typeof payload.sourceName === 'string' ? payload.sourceName : 'EZ_preview').replace(/\.[^.]+$/, '').replace(/[\\/:*?"<>|]/g, '_') || 'EZ_preview';
   const timeLabel = `${Math.round(timeSeconds * 1000)}ms`;
-  const defaultPath = path.join(app.getPath('pictures'), `${sourceBase}_${timeLabel}_original.png`);
+  const defaultPath = path.join(app.getPath('pictures'), `${sourceBase}_${timeLabel}_original.jpg`);
   const ownerWindow = BrowserWindow.fromWebContents(event.sender) || null;
   const saveDialogOptions = {
-    title: 'Export original-resolution PNG',
+    title: 'Export original-resolution still',
     defaultPath,
-    buttonLabel: 'Export PNG',
-    filters: [{ name: 'PNG Image', extensions: ['png'] }]
+    buttonLabel: 'Export Still',
+    filters: [
+      { name: 'JPEG Image — Fast, Original Res (*.jpg)', extensions: ['jpg', 'jpeg'] },
+      { name: 'PNG Image — Lossless (*.png)', extensions: ['png'] }
+    ]
   };
   const saveResult = ownerWindow
     ? await dialog.showSaveDialog(ownerWindow, saveDialogOptions)
     : await dialog.showSaveDialog(saveDialogOptions);
   if (saveResult.canceled || !saveResult.filePath) return { cancelled: true };
-  const outputPath = /\.png$/i.test(saveResult.filePath) ? saveResult.filePath : `${saveResult.filePath}.png`;
+  const isPng = /\.png$/i.test(saveResult.filePath);
+  const outputPath = /\.(png|jpe?g)$/i.test(saveResult.filePath) ? saveResult.filePath : `${saveResult.filePath}.jpg`;
 
   let cubePath = null;
   let renderPath = null;
@@ -945,6 +949,7 @@ ipcMain.handle('ez-native:export-original-frame', async (event, payload) => {
     const crop = cropFilterForAspect(payload && payload.aspectRatio);
     const filters = [`[0:v:0]${crop}[cropped]`];
 
+    const outPixFmt = isPng ? 'rgb24' : 'yuvj420p';
     if (splitEnabled && lutFilter) {
       const axis = orientation === 'vertical' ? 'X' : 'Y';
       const extent = orientation === 'vertical' ? 'W' : 'H';
@@ -955,20 +960,24 @@ ipcMain.handle('ez-native:export-original-frame', async (event, payload) => {
       filters.push(`[original][graded]blend=all_expr='if(lt(${axis},${extent}*${position}),${first},${second})'[composite]`);
       const dividerFilters = splitDividerFilters(split, orientation, payload.previewFrameWidth, payload.previewFrameHeight);
       filters.push(`[composite]${dividerFilters.join(',')}[framed]`);
-      filters.push(`[framed]format=rgb24[out]`);
+      filters.push(`[framed]format=${outPixFmt}[out]`);
     } else if (gradeEnabled && lutFilter) {
-      filters.push(`[cropped]${lutFilter},format=rgb24[out]`);
+      filters.push(`[cropped]${lutFilter},format=${outPixFmt}[out]`);
     } else {
-      filters.push(`[cropped]format=rgb24[out]`);
+      filters.push(`[cropped]format=${outPixFmt}[out]`);
     }
 
-    renderPath = path.join(ensureProxyDirectory(), `original-frame-${randomUUID()}.png`);
+    renderPath = path.join(ensureProxyDirectory(), `original-frame-${randomUUID()}.${isPng ? 'png' : 'jpg'}`);
+    const codecArgs = isPng
+      ? ['-c:v', 'png', '-compression_level', '2', '-pred', 'sub', '-pix_fmt', 'rgb24']
+      : ['-c:v', 'mjpeg', '-q:v', '2', '-pix_fmt', 'yuvj420p'];
     const args = [
       '-hide_banner', '-y', '-nostdin',
+      '-probesize', '5M', '-analyzeduration', '2M',
       '-ss', String(timeSeconds), '-i', inputPath,
       '-filter_complex', filters.join(';'),
       '-map', '[out]', '-frames:v', '1',
-      '-an', '-c:v', 'png', '-compression_level', '2', '-pred', 'sub', '-pix_fmt', 'rgb24',
+      '-an', ...codecArgs,
       renderPath
     ];
 
@@ -1014,7 +1023,7 @@ ipcMain.handle('ez-native:export-original-frame', async (event, payload) => {
     await fs.promises.copyFile(renderPath, outputPath);
     const outputStats = await fs.promises.stat(outputPath);
     if (!outputStats.isFile() || outputStats.size < 128) throw new Error('The saved PNG file is missing or incomplete.');
-    return { cancelled: false, outputPath, outputBytes: outputStats.size, bitDepth: 8 };
+    return { cancelled: false, outputPath, outputBytes: outputStats.size, format: isPng ? 'PNG' : 'JPG', bitDepth: 8 };
   } finally {
     if (cubePath) await fs.promises.rm(cubePath, { force: true }).catch(() => {});
     if (renderPath) await fs.promises.rm(renderPath, { force: true }).catch(() => {});

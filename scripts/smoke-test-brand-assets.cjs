@@ -46,8 +46,8 @@ assert.ok(fs.existsSync(path.join(build, 'ez-logo-original.png')), 'original use
 
 const pkg = require('../package.json');
 const workflow = fs.readFileSync(path.join(root, '.github', 'workflows', 'build-release.yml'), 'utf8');
-assert.equal(pkg.version, '1.0.0-rc.7');
-assert.match(workflow, /v1\.0\.0-rc\.7/, 'release artifact names must match package version');
+assert.equal(pkg.version, '1.0.0-rc.8');
+assert.match(workflow, /v1\.0\.0-rc\.8/, 'release artifact names must match package version');
 assert.match(workflow, /npm install --no-audit --no-fund/, 'Catalina legacy profile should refresh its lockfile after changing Electron');
 assert.match(pkg.build.files.join(' '), /!PUBLISH-RC3\.md/, 'the repository publishing guide must not be copied into the installed app');
 assert.equal(pkg.build.mac.icon, 'build/icon.icns');
